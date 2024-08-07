@@ -1,0 +1,107 @@
+<!DOCTYPE html>
+<html lang="es">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Mixer</title>
+    <link rel='stylesheet' type="text/css" media="screen" href="mixer.css">
+    <script src='mixer.js'></script>
+</head>
+<header>
+    <nav>
+        <!-- nav-items -->
+    </nav>
+</header>
+<body>
+    <audio src="media/Base.wav" id="file-ch1"></audio>
+    <section class="reproductor"> <!--reproductor-->
+        <div class="reproductor__buttons-container"> <!-- reproductor's buttons -->
+            <button type="button" name="play" id="play-button">></button>
+            <button type="button" name="stop" id="stop-button">|=|</button>
+        </div>
+        <div class="reproductor__progress-bar-container"> <!-- progress-bar-cointainer -->
+            <div class="reproductor__progress-bar-container--progress-bar" id="progress-bar"><!-- progress-bar --></div>
+        </div>
+        <div class="reproductor__time-container"> <!-- actual-time/total-time -->
+            <p id="current-time">--</p>
+            <p>/</p>
+            <p id="duration">--</p>
+        </div>
+    </section>
+    <section class="mixer"> <!--mixer-->
+        <div class="mixer__pan"> <!--preamps-->
+            <div class="mixer__pan-container">
+                <p>Pan</p>
+                <input type="range" name="pan-ch1" id="pan-ch1" min="-1" max="1" step="0.1" value="0">
+            </div>
+        </div>
+        <div class="mixer__eqs"> <!--eqs-->
+            <div class="mixer__eqs-container">
+                <p>LF</p>
+                <input type="range" name="eq-ch1-lf" id="eq-ch1-lf" min="-10" max="10" step="1" value="0">
+            </div>
+            <div class="mixer__eqs-container">
+                <p>MF</p>
+                <input type="range" name="eq-ch1-mf" id="eq-ch1-mf" min="-10" max="10" step="0" value="0.5">
+            </div>
+            <div class="mixer__eqs-container">
+                <p>HF</p>
+                <input type="range" name="eq-ch1-hf" id="eq-ch1-hf" min="-10" max="10" step="1" value="0">
+            </div>
+        </div>
+        <div class="mixer__fader"> <!--volume-control & meter-log-->
+            <div class="mixer__fader--buttons-container">
+                <button type="button" id="solo-button-ch1">S</button> <!-- solo channel -->
+                <button type="button" id="mute-button-ch1">M</button> <!-- mute channel -->
+            </div>
+            <div class="mixer__fader--fader-container"> <!--fader-->
+                <input type="range" name="fader-ch1" id="fader-ch1" min="0" max="1" step="0.1" value="0">
+            </div>
+            <div class="mixer__fader--meter-container">  <!--meter-->
+                <meter value="0" min="0" max="1" low="0.3" high="0.7" optimum="0.5"></meter>
+            </div>
+        </div>
+        <div class="mixer__track-name"> <!-- channel's name -->
+            <p><input type="text" name="key-track-name" class="mixer__track-name--input"></p>
+            <p><input type="text" name="text-track-name" class="mixer__track-name--input"></p>
+        </div>
+        <!--Channel 2-->
+        <div class="mixer__pan--ch2"> <!--preamps-->
+            <div class="mixer__pan-container">
+                <p>Pan</p>
+                <input type="range" name="pan-ch2" min="-1" max="1" step="0.1" value="0">
+            </div>
+        </div>
+        <div class="mixer__eqs--ch2"> <!--eqs-->
+            <div class="mixer__eqs-container">
+                <p>LF</p>
+                <input type="range" name="eq-ch1-lf" min="0" max="1" step="0.1" value="0.5">
+            </div>
+            <div class="mixer__eqs-container">
+                <p>MF</p>
+                <input type="range" name="eq-ch1-mf" min="0" max="1" step="0.1" value="0.5">
+            </div>
+            <div class="mixer__eqs-container">
+                <p>HF</p>
+                <input type="range" name="eq-ch1-hf" min="0" max="1" step="0.1" value="0.5">
+            </div>
+        </div>
+        <div class="mixer__fader--ch2"> <!--volume-control & meter-log-->
+            <div class="mixer__fader--buttons-container">
+                <button type="button">S</button> <!-- solo channel -->
+                <button type="button">M</button> <!-- mute channel -->
+            </div>
+            <div class="mixer__fader--fader-container"> <!--fader-->
+                <input type="range" name="fader-ch1" min="0" max="1" step="0.1" value="0">
+            </div>
+            <div class="mixer__fader--meter-container">  <!--meter-->
+                <meter value="0" min="0" max="1" low="0.3" high="0.7" optimum="0.5"></meter>
+            </div>
+        </div>
+        <div class="mixer__track-name--ch2"> <!-- channel's name -->
+            <p><input type="text" name="key-track-name" class="mixer__track-name--input"></p>
+            <p><input type="text" name="text-track-name" class="mixer__track-name--input"></p>
+        </div>
+    </section>
+</body>
+</html>

@@ -1,0 +1,234 @@
+/*colores: 
+.color3 {color: #00397d;} azul
+.color4 {color: #3e7ea3;} celeste
+.color5 {color: #c3c8cb;} gris*/
+
+*{
+    margin: 0px;
+    padding: 0px;
+    text-decoration: none;
+    font-family: Verdana, Geneva, Tahoma, sans-serif;
+}
+
+.reproductor{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 350px;
+    height: 100px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.reproductor__buttons-container{
+    display: flex;
+    justify-content: space-around;
+    align-items: center;
+    width: 80px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.reproductor__buttons-container button{
+    width: 30px;
+    height: 30px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.reproductor__progress-bar-container{
+    width: 120px;
+    height: 15px;
+    border-radius: 15px;
+    border: 1px solid black;
+}
+
+.reproductor__progress-bar-container--progress-bar{
+    width: 0px;
+    height: 14px;
+    border-radius: 15px;
+    background-color: green;
+}
+
+.reproductor__time-container{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    width: 100px;
+    height: 40px;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.mixer{
+    display: grid;
+    grid-template-rows: 100px 200px 300px 80px;
+    grid-template-columns: 150px 150px 150px 150px 150px 150px;
+    gap: 10px;
+    padding: 10px;
+    border: 1px solid black;
+}
+
+.mixer__pan{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 1/2;
+    grid-column: 1/2;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.mixer__pan--ch2{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 1/2;
+    grid-column: 2/3;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.mixer__pan-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    width: 130px;
+    height: 50px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__eqs{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2/3;
+    grid-column: 1/2;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__eqs--ch2{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2/3;
+    grid-column: 2/3;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__eqs-container{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    width: 130px;
+    height: 45px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__eqs--hpf{
+    width: 30px;
+    height: 30px;
+    border: 1px solid black;
+}
+
+.mixer__fader{
+    grid-row: 3/4;
+    grid-column: 1/2;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__fader--ch2{
+    grid-row: 3/4;
+    grid-column: 2/3;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__fader--buttons-container{
+    position: relative;
+    top: 20px;
+    right: -90px;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    width: 40px;
+    height: 70px;
+    border: 1px solid black;
+}
+
+.mixer__fader--buttons-container button{
+    width: 30px;
+    height: 30px;
+    margin: 2.5px 0px;
+}
+
+.mixer__fader--fader-container{
+    position: relative;
+    top: 60px;
+    right: 80px;
+    width: 265px;
+    transform: rotate(-90deg);
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__fader--fader-container input[name='fader-ch1']{
+    width: 250px;
+    height: 25px;
+    padding: 5px;
+}
+
+.mixer__fader--meter-container{
+    position: relative;
+    top: 70px;
+    right: -20px;
+    width: 175px;
+    height: 30px;
+    transform: rotate(-90deg);
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__fader--meter-container meter{
+    width: 170px;
+    height: 25px;
+}
+
+.mixer__track-name{
+    grid-row: 4/5;
+    grid-column: 1/2;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__track-name--ch2{
+    grid-row: 4/5;
+    grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__track-name--input{
+    width: 120px;
+    height: 20px;
+    border-radius: 10px;
+    border: 1px solid black;
+}
