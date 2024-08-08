@@ -16,6 +16,8 @@
     align-items: center;
     width: 350px;
     height: 100px;
+    margin: 10px;
+    padding: 5px;
     border-radius: 15px;
     border: 1px solid black;
 }
@@ -63,10 +65,12 @@
 
 .mixer{
     display: grid;
-    grid-template-rows: 100px 200px 300px 80px;
+    grid-template-rows: 70px 200px 300px 70px;
     grid-template-columns: 150px 150px 150px 150px 150px 150px;
     gap: 10px;
+    margin: 10px;
     padding: 10px;
+    border-radius: 15px;
     border: 1px solid black;
 }
 
@@ -86,6 +90,26 @@
     align-items: center;
     grid-row: 1/2;
     grid-column: 2/3;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.mixer__pan--ch3{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 1/2;
+    grid-column: 3/4;
+    border-radius: 20px;
+    border: 1px solid black;
+}
+
+.mixer__pan--ch4{
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    grid-row: 1/2;
+    grid-column: 4/5;
     border-radius: 20px;
     border: 1px solid black;
 }
@@ -122,6 +146,28 @@
     border: 1px solid black;
 }
 
+.mixer__eqs--ch3{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2/3;
+    grid-column: 3/4;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__eqs--ch4{
+    display: flex;
+    flex-wrap: wrap;
+    justify-content: center;
+    align-items: center;
+    grid-row: 2/3;
+    grid-column: 4/5;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
 .mixer__eqs-container{
     display: flex;
     flex-wrap: wrap;
@@ -149,6 +195,20 @@
 .mixer__fader--ch2{
     grid-row: 3/4;
     grid-column: 2/3;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__fader--ch3{
+    grid-row: 3/4;
+    grid-column: 3/4;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__fader--ch4{
+    grid-row: 3/4;
+    grid-column: 4/5;
     border-radius: 10px;
     border: 1px solid black;
 }
@@ -218,6 +278,28 @@
 .mixer__track-name--ch2{
     grid-row: 4/5;
     grid-column: 2/3;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__track-name--ch3{
+    grid-row: 4/5;
+    grid-column: 3/4;
+    display: flex;
+    flex-direction: column;
+    justify-content: space-around;
+    align-items: center;
+    border-radius: 10px;
+    border: 1px solid black;
+}
+
+.mixer__track-name--ch4{
+    grid-row: 4/5;
+    grid-column: 4/5;
     display: flex;
     flex-direction: column;
     justify-content: space-around;
