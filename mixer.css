@@ -182,7 +182,7 @@
     border: 1px solid black;
 }
 
-.mixer__fader--fader-container input[name='fader-ch1']{
+.mixer__fader--fader-container input[name='fader-ch']{
     width: 250px;
     height: 25px;
     padding: 5px;

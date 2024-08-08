@@ -2,9 +2,9 @@ var channel_1 = [];
 var channel_2 = [];
 var control = 0;
 var maximo = 120;
-var maximo, progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext;
-var file_1, track_1, eq_ch1_lf, eq_ch1_hf, eq_ch1_mf, mute_button_ch1, pan_ch1, volumen_ch1;
-var file_2, track_2, pan_ch2;
+var progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext;
+var file_1, track_1, pan_ch, eq_ch_lf, eq_ch_hf, eq_ch_mf, mute_button_ch, volumen_ch;
+var file_2, track_2;
 
 function iniciar(){
     // REPRODUCTOR
@@ -19,28 +19,32 @@ function iniciar(){
     file_1 = document.getElementById("file-ch1");
     track_1 = myAudioContext.createMediaElementSource(file_1);
     track_1.connect(channel_1[0]).connect(channel_1[1]).connect(channel_1[2]).connect(channel_1[3]).connect(channel_1[4]).connect(myAudioContext.destination); 
-    mute_button_ch1 = document.getElementById("mute-button-ch1");
-    pan_ch1 = document.getElementById("pan-ch1");
-    eq_ch1_lf = document.getElementById("eq-ch1-lf");
-    eq_ch1_mf = document.getElementById("eq-ch1-mf");
-    eq_ch1_hf = document.getElementById("eq-ch1-hf");
-    volumen_ch1 = document.getElementById("fader-ch1");
-    mute_button_ch1.addEventListener("click", function(evento){
+    pan_ch = document.getElementsByName("pan-ch");
+    eq_ch_lf = document.getElementsByName("eq-ch-lf");
+    eq_ch_mf = document.getElementsByName("eq-ch-mf");
+    eq_ch_hf = document.getElementsByName("eq-ch-hf");
+    volumen_ch = document.getElementsByName("fader-ch");
+    mute_button_ch = document.getElementsByName("mute-button");
+    /*mute_button_ch.addEventListener("click", function(evento){
         control += 1;
         mutear(evento, control);
-    });
-    pan_ch1.addEventListener("change", panear);
-    eq_ch1_lf.addEventListener("change", low_eq);
-    eq_ch1_mf.addEventListener("change", mf_eq);
-    eq_ch1_hf.addEventListener("change", hi_eq);
-    volumen_ch1.addEventListener("change", volumen);
+    });*/
+    for(var i = 0; i < pan_ch.length; i++){
+        pan_ch[i].addEventListener("change", panear);
+        eq_ch_lf[i].addEventListener("change", low_eq);
+        eq_ch_mf[i].addEventListener("change", mf_eq);
+        eq_ch_hf[i].addEventListener("change", hi_eq);
+        volumen_ch[i].addEventListener("change", volumen);
+        mute_button_ch[i].addEventListener("click", function(evento){
+            control += 1;
+            mutear(evento, control);
+        });
+    }
     // CHANNEL 2
     channel_2 = channel(myAudioContext);
     file_2 = document.getElementById("file-ch2");
     track_2 = myAudioContext.createMediaElementSource(file_2);
     track_2.connect(channel_2[0]).connect(channel_2[1]).connect(channel_2[2]).connect(channel_2[3]).connect(channel_2[4]).connect(myAudioContext.destination);
-    pan_ch2 = document.getElementById("pan-ch2");
-    pan_ch2.addEventListener("change", panear);
 }
 
 function channel(myAudioContext){
@@ -91,35 +95,59 @@ function estado(){
     }
 }
 
-function volumen(){
-    channel_1[0].gain.value = volumen_ch1.value;
+function volumen(evento){
+    console.log(evento.target.id);
+    if(evento.target.id == "fader-ch1"){
+        channel_1[0].gain.value = volumen_ch[0].value;
+    } else {
+        channel_2[0].gain.value = volumen_ch[1].value;
+    }
+    
 }
 
 function panear(evento){
+    console.log(evento.target.id);
     if(evento.target.id == "pan-ch1"){
-        channel_1[1].pan.value = pan_ch1.value;
+        channel_1[1].pan.value = pan_ch[0].value;
     } else {
-        channel_2[1].pan.value = pan_ch2.value;
+        channel_2[1].pan.value = pan_ch[1].value;
     }
 }
 
-function low_eq(){
-    channel_1[2].gain.value = eq_ch1_lf.value;
+function low_eq(evento){
+    if(evento.target.id == "eq-ch1-lf"){
+        channel_1[2].gain.value = eq_ch_lf[0].value;
+    } else {
+        channel_2[2].gain.value = eq_ch_lf[1].value;
+    }
 }
 
-function mf_eq(){
-    channel_1[3].gain.value = eq_ch1_mf.value;
+function mf_eq(evento){
+    if(evento.target.id == "eq-ch1-mf"){
+        channel_1[3].gain.value = eq_ch_mf[0].value;
+    } else {
+        channel_2[3].gain.value = eq_ch_mf[1].value;
+    }
+    
 }
 
-function hi_eq(){
-    channel_1[4].gain.value = eq_ch1_hf.value;
+function hi_eq(evento){
+    if(evento.target.id == "eq-ch1-hf"){
+        channel_1[4].gain.value = eq_ch_hf[0].value;
+    } else {
+        channel_2[4].gain.value = eq_ch_hf[1].value;
+    }
 }
 
 function mutear(evento, control){
-    if((control % 2) == 0){
-        channel_1[0].gain.value = volumen_ch1.value;
-    } else {
+    if(((control % 2) == 0) && (evento.target.id == "mute-button-ch1")){
+        channel_1[0].gain.value = volumen_ch[0].value;
+    } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch2")){
+        channel_2[0].gain.value = volumen_ch[1].value;
+    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch1")){
         channel_1[0].gain.value = 0;
+    } else {
+        channel_2[0].gain.value = 0;
     }
 }
 
