@@ -2,10 +2,11 @@ var channel_1 = [];
 var channel_2 = [];
 var channel_3 = [];
 var channel_4 = [];
+var channel_5 = [];
 var control = 0;
 var progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext;
 var file_1, track_1, pan_ch, eq_ch_lf, eq_ch_hf, eq_ch_mf, mute_button_ch, volumen_ch;
-var file_2, track_2, file_3, track_3, file_4, track_4;
+var file_2, track_2, file_3, track_3, file_4, track_4, file_5, track_5;
 
 function iniciar(){
     // REPRODUCTOR
@@ -52,6 +53,11 @@ function iniciar(){
     file_4 = document.getElementById("file-ch4");
     track_4 = myAudioContext.createMediaElementSource(file_4);
     track_4.connect(channel_4[0]).connect(channel_4[1]).connect(channel_4[2]).connect(channel_4[3]).connect(channel_4[4]).connect(myAudioContext.destination);
+    // CHANNEL 5
+    channel_5 = channel(myAudioContext);
+    file_5 = document.getElementById("file-ch5");
+    track_5 = myAudioContext.createMediaElementSource(file_5);
+    track_5.connect(channel_5[0]).connect(channel_5[1]).connect(channel_5[2]).connect(channel_5[3]).connect(channel_5[4]).connect(myAudioContext.destination);
 }
 
 function channel(myAudioContext){
@@ -82,6 +88,7 @@ function reproducir(){
         file_2.pause();
         file_3.pause();
         file_4.pause();
+        file_5.pause();
         clearInterval(bucle);
     }else{
         play_button.innerHTML = "||";
@@ -89,6 +96,7 @@ function reproducir(){
         file_2.play();
         file_3.play();
         file_4.play();
+        file_5.play();
         bucle = setInterval(estado, 1000);
     }
 }
@@ -114,8 +122,10 @@ function volumen(evento){
         channel_2[0].gain.value = volumen_ch[1].value;
     } else if (evento.target.id == "fader-ch3"){
         channel_3[0].gain.value = volumen_ch[2].value;
-    } else {
+    } else if (evento.target.id == "fader-ch4"){
         channel_4[0].gain.value = volumen_ch[3].value;
+    } else {
+        channel_5[0].gain.value = volumen_ch[4].value;
     }
     
 }
@@ -127,8 +137,10 @@ function panear(evento){
         channel_2[1].pan.value = pan_ch[1].value;
     } else if (evento.target.id == "pan-ch3"){
         channel_3[1].pan.value = pan_ch[2].value;
-    } else {
+    } else if (evento.target.id == "pan-ch4"){
         channel_4[1].pan.value = pan_ch[3].value;
+    } else{
+        channel_5[1].pan.value = pan_ch[4].value;
     }
 }
 
@@ -139,8 +151,10 @@ function low_eq(evento){
         channel_2[2].gain.value = eq_ch_lf[1].value;
     } else if (evento.target.id == "eq-ch3-lf"){
         channel_3[2].gain.value = eq_ch_lf[2].value;
-    } else {
+    } else if (evento.target.id == "eq-ch4-lf"){
         channel_4[2].gain.value = eq_ch_lf[3].value;
+    } else {
+        channel_4[2].gain.value = eq_ch_lf[4].value;
     }
 }
 
@@ -151,8 +165,10 @@ function mf_eq(evento){
         channel_2[3].gain.value = eq_ch_mf[1].value;
     } else if (evento.target.id == "eq-ch3-mf"){
         channel_3[3].gain.value = eq_ch_mf[2].value;
-    } else {
+    } else if (evento.target.id == "eq-ch4-mf"){
         channel_4[3].gain.value = eq_ch_mf[3].value;
+    } else {
+        channel_5[3].gain.value = eq_ch_mf[4].value;
     }
     
 }
@@ -164,8 +180,10 @@ function hi_eq(evento){
         channel_2[4].gain.value = eq_ch_hf[1].value;
     } else if (evento.target.id == "eq-ch3-hf"){
         channel_3[4].gain.value = eq_ch_hf[2].value;
-    } else {
+    } else if (evento.target.id == "eq-ch4-hf"){
         channel_4[4].gain.value = eq_ch_hf[3].value;
+    } else {
+        channel_5[4].gain.value = eq_ch_hf[4].value;
     }
 }
 
@@ -178,14 +196,18 @@ function mutear(evento, control){
         channel_3[0].gain.value = volumen_ch[2].value;
     } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch4")){
         channel_4[0].gain.value = volumen_ch[3].value;
+    } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch5")){
+        channel_5[0].gain.value = volumen_ch[4].value;
     } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch1")){
         channel_1[0].gain.value = 0;
     } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch2")){
         channel_2[0].gain.value = 0;
-    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch3")) {
+    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch3")){
         channel_3[0].gain.value = 0;
-    } else {
+    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch4")){
         channel_4[0].gain.value = 0;
+    } else {
+        channel_5[0].gain.value = 0;
     }
 }
 
