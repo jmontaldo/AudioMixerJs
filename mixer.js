@@ -4,8 +4,9 @@ var channel_3 = [];
 var channel_4 = [];
 var channel_5 = [];
 var control = 0;
+var control2 = 0;
 var progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext;
-var file_1, track_1, pan_ch, eq_ch_lf, eq_ch_hf, eq_ch_mf, mute_button_ch, volumen_ch;
+var file_1, track_1, pan_ch, eq_ch_lf, eq_ch_hf, eq_ch_mf,solo_button_ch, mute_button_ch, volumen_ch;
 var file_2, track_2, file_3, track_3, file_4, track_4, file_5, track_5;
 
 function iniciar(){
@@ -27,6 +28,7 @@ function iniciar(){
     eq_ch_hf = document.getElementsByName("eq-ch-hf");
     volumen_ch = document.getElementsByName("fader-ch");
     mute_button_ch = document.getElementsByName("mute-button");
+    solo_button_ch = document.getElementsByName("solo-button");
     for(var i = 0; i < pan_ch.length; i++){
         pan_ch[i].addEventListener("change", panear);
         eq_ch_lf[i].addEventListener("change", low_eq);
@@ -36,6 +38,12 @@ function iniciar(){
         mute_button_ch[i].addEventListener("click", function(evento){
             control += 1;
             mutear(evento, control);
+            this.classList.toggle("mixer__fader--buttons-container-on");
+        });
+        solo_button_ch[i].addEventListener("click", function(evento){
+            control2 += 1;
+            solo(evento, control2);
+            this.classList.toggle("mixer__fader--buttons-container-on-solo");
         });
     }
     // CHANNEL 2
@@ -208,6 +216,41 @@ function mutear(evento, control){
         channel_4[0].gain.value = 0;
     } else {
         channel_5[0].gain.value = 0;
+    }
+}
+
+function solo(evento, control2){
+    if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch1")){
+        channel_2[0].gain.value = 0;
+        channel_3[0].gain.value = 0;
+        channel_4[0].gain.value = 0;
+        channel_5[0].gain.value = 0;
+    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch2")){
+        channel_1[0].gain.value = 0;
+        channel_3[0].gain.value = 0;
+        channel_4[0].gain.value = 0;
+        channel_5[0].gain.value = 0;
+    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch3")){
+        channel_1[0].gain.value = 0;
+        channel_2[0].gain.value = 0;
+        channel_4[0].gain.value = 0;
+        channel_5[0].gain.value = 0;
+    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch4")){
+        channel_1[0].gain.value = 0;
+        channel_2[0].gain.value = 0;
+        channel_3[0].gain.value = 0;
+        channel_5[0].gain.value = 0;
+    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch5")){
+        channel_1[0].gain.value = 0;
+        channel_2[0].gain.value = 0;
+        channel_3[0].gain.value = 0;
+        channel_4[0].gain.value = 0;
+    } else {
+        channel_1[0].gain.value = volumen_ch[0].value;
+        channel_2[0].gain.value = volumen_ch[1].value;
+        channel_3[0].gain.value = volumen_ch[2].value;
+        channel_4[0].gain.value = volumen_ch[3].value;
+        channel_5[0].gain.value = volumen_ch[4].value;
     }
 }
 
