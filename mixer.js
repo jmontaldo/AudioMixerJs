@@ -91,7 +91,7 @@ function reproducir(){
         myAudioContext.resume();
     }
     if(!file_1.paused && !file_1.ended){
-        play_button.innerHTML = ">";
+        play_button.src = "media/icons/play_button.png";
         file_1.pause();
         file_2.pause();
         file_3.pause();
@@ -99,7 +99,7 @@ function reproducir(){
         file_5.pause();
         clearInterval(bucle);
     }else{
-        play_button.innerHTML = "||";
+        play_button.src = "media/icons/pause_button.png";
         file_1.play();
         file_2.play();
         file_3.play();
@@ -119,6 +119,7 @@ function estado(){
     } else {
         progreso.style.width = "0px";
         tiempo_total.innerHTML = parseInt(file_1.duration);
+        play_button.src = "media/icons/play_button.png";
         clearInterval(bucle);
     }
 }

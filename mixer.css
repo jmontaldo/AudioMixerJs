@@ -41,7 +41,7 @@ body{
     background-color: #3e7ea3;
 }
 
-.reproductor__buttons-container button{
+.reproductor__buttons-container img{
     width: 30px;
     height: 30px;
     border-radius: 15px;
