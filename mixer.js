@@ -3,7 +3,7 @@ var channel_2 = [];
 var channel_3 = [];
 var channel_4 = [];
 var channel_5 = [];
-var control = 0;
+var control = [0, 0, 0, 0, 0];
 var control2 = 0;
 var progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext;
 var file_1, track_1, pan_ch, eq_ch_lf, eq_ch_hf, eq_ch_mf,solo_button_ch, mute_button_ch, volumen_ch;
@@ -36,14 +36,13 @@ function iniciar(){
         eq_ch_hf[i].addEventListener("change", hi_eq);
         volumen_ch[i].addEventListener("change", volumen);
         mute_button_ch[i].addEventListener("click", function(evento){
-            control += 1;
             mutear(evento, control);
             this.classList.toggle("mixer__fader--buttons-container-on");
         });
         solo_button_ch[i].addEventListener("click", function(evento){
-            control2 += 1;
-            solo(evento, control2);
+            control2 ++;
             this.classList.toggle("mixer__fader--buttons-container-on-solo");
+            solo(evento, control2);
         });
     }
     // CHANNEL 2
@@ -197,51 +196,61 @@ function hi_eq(evento){
 }
 
 function mutear(evento, control){
-    if(((control % 2) == 0) && (evento.target.id == "mute-button-ch1")){
+    if(((control[0] % 2) != 0) && (evento.target.id == "mute-button-ch1")){
         channel_1[0].gain.value = volumen_ch[0].value;
-    } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch2")){
+        control[0] ++;
+    } else if (((control[1] % 2) != 0) && (evento.target.id == "mute-button-ch2")){
         channel_2[0].gain.value = volumen_ch[1].value;
-    } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch3")){
+        control[1] ++;
+    } else if (((control[2] % 2) != 0) && (evento.target.id == "mute-button-ch3")){
         channel_3[0].gain.value = volumen_ch[2].value;
-    } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch4")){
+        control[2] ++;
+    } else if (((control[3] % 2) != 0) && (evento.target.id == "mute-button-ch4")){
         channel_4[0].gain.value = volumen_ch[3].value;
-    } else if (((control % 2) == 0) && (evento.target.id == "mute-button-ch5")){
+        control[3] ++;
+    } else if (((control[4] % 2) != 0) && (evento.target.id == "mute-button-ch5")){
         channel_5[0].gain.value = volumen_ch[4].value;
-    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch1")){
+        control[4] ++;
+    } else if (((control[0] % 2) == 0) && (evento.target.id == "mute-button-ch1")){
         channel_1[0].gain.value = 0;
-    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch2")){
+        control[0] ++;
+    } else if (((control[1] % 2) == 0) && (evento.target.id == "mute-button-ch2")){
         channel_2[0].gain.value = 0;
-    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch3")){
+        control[1] ++;
+    } else if (((control[2] % 2) == 0) && (evento.target.id == "mute-button-ch3")){
         channel_3[0].gain.value = 0;
-    } else if (((control % 2) != 0) && (evento.target.id == "mute-button-ch4")){
+        control[2] ++;
+    } else if (((control[3] % 2) == 0) && (evento.target.id == "mute-button-ch4")){
         channel_4[0].gain.value = 0;
+        control[3] ++;
     } else {
         channel_5[0].gain.value = 0;
+        control[4] ++;
     }
 }
 
 function solo(evento, control2){
-    if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch1")){
+    if((evento.target.id == "solo-button-ch1")&&(control2 % 2 != 0)){
         channel_2[0].gain.value = 0;
         channel_3[0].gain.value = 0;
         channel_4[0].gain.value = 0;
         channel_5[0].gain.value = 0;
-    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch2")){
+    }else if((evento.target.id == "solo-button-ch2")&&(control2 % 2 != 0)){
         channel_1[0].gain.value = 0;
         channel_3[0].gain.value = 0;
         channel_4[0].gain.value = 0;
         channel_5[0].gain.value = 0;
-    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch3")){
+    }else if((evento.target.id == "solo-button-ch3")&&(control2 % 2 != 0)){
         channel_1[0].gain.value = 0;
         channel_2[0].gain.value = 0;
         channel_4[0].gain.value = 0;
         channel_5[0].gain.value = 0;
-    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch4")){
+    }else if((evento.target.id == "solo-button-ch4")&&(control2 % 2 != 0)){
         channel_1[0].gain.value = 0;
         channel_2[0].gain.value = 0;
         channel_3[0].gain.value = 0;
         channel_5[0].gain.value = 0;
-    }else if(((control2 % 2) != 0) && (evento.target.id == "solo-button-ch5")){
+    }else if ((evento.target.id == "solo-button-ch5")&&(control2 % 2 != 0)){
         channel_1[0].gain.value = 0;
         channel_2[0].gain.value = 0;
         channel_3[0].gain.value = 0;
@@ -253,6 +262,7 @@ function solo(evento, control2){
         channel_4[0].gain.value = volumen_ch[3].value;
         channel_5[0].gain.value = volumen_ch[4].value;
     }
+    console.log(control2);
 }
 
 window.addEventListener("load", iniciar);
