@@ -266,6 +266,7 @@ function solo(evento, control2){
         channel_3[0].gain.value = volumen_ch[2].value;
         channel_4[0].gain.value = volumen_ch[3].value;
         channel_5[0].gain.value = volumen_ch[4].value;
+        this.classList.toggle("mixer__fader--buttons-container-on-solo")
     }
 }
 
@@ -278,7 +279,6 @@ function visualize(){
     }
     const average = sum/data.length;
     meter.value = average / 256;
-    console.log(meter.value);
 }
 
 window.addEventListener("load", iniciar);
