@@ -5,7 +5,7 @@ var channel_4 = [];
 var channel_5 = [];
 var control = [0, 0, 0, 0, 0];
 var control2 = 0;
-var progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext;
+var progreso, bucle, tiempo_actual, tiempo_total, play_button, myAudioContext, analizer, meter, data;
 var file_1, track_1, pan_ch, eq_ch_lf, eq_ch_hf, eq_ch_mf,solo_button_ch, mute_button_ch, volumen_ch;
 var file_2, track_2, file_3, track_3, file_4, track_4, file_5, track_5;
 
@@ -18,10 +18,14 @@ function iniciar(){
     play_button.addEventListener("click", reproducir);
     // CHANNEL 1
     myAudioContext = new AudioContext();
+    analizer = myAudioContext.createAnalyser();
+    analizer.fftSize = 256;
+    meter = document.getElementById("meter");
+    data = new Uint8Array(analizer.frequencyBinCount);
     channel_1 = channel(myAudioContext);
     file_1 = document.getElementById("file-ch1");
     track_1 = myAudioContext.createMediaElementSource(file_1);
-    track_1.connect(channel_1[0]).connect(channel_1[1]).connect(channel_1[2]).connect(channel_1[3]).connect(channel_1[4]).connect(myAudioContext.destination); 
+    track_1.connect(channel_1[0]).connect(channel_1[1]).connect(channel_1[2]).connect(channel_1[3]).connect(channel_1[4]).connect(analizer).connect(myAudioContext.destination); 
     pan_ch = document.getElementsByName("pan-ch");
     eq_ch_lf = document.getElementsByName("eq-ch-lf");
     eq_ch_mf = document.getElementsByName("eq-ch-mf");
@@ -49,22 +53,23 @@ function iniciar(){
     channel_2 = channel(myAudioContext);
     file_2 = document.getElementById("file-ch2");
     track_2 = myAudioContext.createMediaElementSource(file_2);
-    track_2.connect(channel_2[0]).connect(channel_2[1]).connect(channel_2[2]).connect(channel_2[3]).connect(channel_2[4]).connect(myAudioContext.destination);
+    track_2.connect(channel_2[0]).connect(channel_2[1]).connect(channel_2[2]).connect(channel_2[3]).connect(channel_2[4]).connect(analizer).connect(myAudioContext.destination);
     // CHANNEL 3
     channel_3 = channel(myAudioContext);
     file_3 = document.getElementById("file-ch3");
     track_3 = myAudioContext.createMediaElementSource(file_3);
-    track_3.connect(channel_3[0]).connect(channel_3[1]).connect(channel_3[2]).connect(channel_3[3]).connect(channel_3[4]).connect(myAudioContext.destination);
+    track_3.connect(channel_3[0]).connect(channel_3[1]).connect(channel_3[2]).connect(channel_3[3]).connect(channel_3[4]).connect(analizer).connect(myAudioContext.destination);
     // CHANNEL 4
     channel_4 = channel(myAudioContext);
     file_4 = document.getElementById("file-ch4");
     track_4 = myAudioContext.createMediaElementSource(file_4);
-    track_4.connect(channel_4[0]).connect(channel_4[1]).connect(channel_4[2]).connect(channel_4[3]).connect(channel_4[4]).connect(myAudioContext.destination);
+    track_4.connect(channel_4[0]).connect(channel_4[1]).connect(channel_4[2]).connect(channel_4[3]).connect(channel_4[4]).connect(analizer).connect(myAudioContext.destination);
     // CHANNEL 5
     channel_5 = channel(myAudioContext);
     file_5 = document.getElementById("file-ch5");
     track_5 = myAudioContext.createMediaElementSource(file_5);
-    track_5.connect(channel_5[0]).connect(channel_5[1]).connect(channel_5[2]).connect(channel_5[3]).connect(channel_5[4]).connect(myAudioContext.destination);
+    track_5.connect(channel_5[0]).connect(channel_5[1]).connect(channel_5[2]).connect(channel_5[3]).connect(channel_5[4]).connect(analizer).connect(myAudioContext.destination);
+    visualize();
 }
 
 function channel(myAudioContext){
@@ -262,7 +267,18 @@ function solo(evento, control2){
         channel_4[0].gain.value = volumen_ch[3].value;
         channel_5[0].gain.value = volumen_ch[4].value;
     }
-    console.log(control2);
+}
+
+function visualize(){
+    requestAnimationFrame(visualize);
+    analizer.getByteFrequencyData(data);
+    let sum = 0;
+    for(let i = 0; i < data.length; i++){
+        sum += data[i];
+    }
+    const average = sum/data.length;
+    meter.value = average / 256;
+    console.log(meter.value);
 }
 
 window.addEventListener("load", iniciar);
