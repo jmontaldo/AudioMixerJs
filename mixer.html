@@ -8,8 +8,28 @@
     <script src='mixer.js'></script>
 </head>
 <header>
-    <nav>
-        <!-- nav-items -->
+    <nav class="nav-container">
+        <!--reproductor-->
+        <div class="reproductor"> 
+            <div class="reproductor__buttons-container"> <!-- reproductor's buttons -->
+                <img src="media/icons/play_button.png" alt="play button" id="play-button">
+            </div>
+            <div class="reproductor__progress-bar-container"> <!-- progress-bar-cointainer -->
+                <div class="reproductor__progress-bar-container--progress-bar" id="progress-bar"><!-- progress-bar --></div>
+            </div>
+            <div class="reproductor__time-container"> <!-- actual-time/total-time -->
+                <p id="current-time">--</p>
+                <p>/</p>
+                <p id="duration">--</p>
+            </div>
+        </div> 
+        <!--meter-->
+        <div class="meter-container">
+            <meter min="0.0" high="0.4" max="0.5" value="0.0" id="meter"></meter>
+        </div>
+        <div class="nav__title-container">
+            <h1>AudioMixerJs</h1>
+        </div>
     </nav>
 </header>
 <body>
@@ -184,25 +204,5 @@
             <p class="mixer__track-name--input">KEYS</p>
         </div>
     </section>
-    <!--reproductor-->
-    <aside class="aside-container">
-        <div class="reproductor"> 
-            <div class="reproductor__buttons-container"> <!-- reproductor's buttons -->
-                <img src="media/icons/play_button.png" alt="play button" id="play-button">
-            </div>
-            <div class="reproductor__progress-bar-container"> <!-- progress-bar-cointainer -->
-                <div class="reproductor__progress-bar-container--progress-bar" id="progress-bar"><!-- progress-bar --></div>
-            </div>
-            <div class="reproductor__time-container"> <!-- actual-time/total-time -->
-                <p id="current-time">--</p>
-                <p>/</p>
-                <p id="duration">--</p>
-            </div>
-        </div> 
-        <!--meter-->
-        <div class="meter-container">
-            <meter min="0.0" high="0.4" max="0.5" value="0.0" id="meter"></meter>
-        </div>
-    </aside>
 </body>
 </html>
