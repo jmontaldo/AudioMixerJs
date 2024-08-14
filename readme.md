@@ -4,8 +4,12 @@ The program uses five audio files with one audioContext and different processing
 
 *Features*
 
-->Solo button: Mutes all the channels except for the one selected.
-->Mute button: Mute the selected channel.
-->EQ: Amplifies or decrease some range of frecuencies (low and high range uses a shelving type EQ, Mid ->frecuencies uses a bell type EQ).
-->Volumen fader: Increase or decrease the volumen of the selected channel.
-->VuMeter: Indicates the signal level of the mix.
+Solo button: Mutes all the channels except for the one selected.
+
+Mute button: Mute the selected channel.
+
+EQ: Amplifies or decrease some range of frecuencies (low and high range uses a shelving type EQ, Mid frecuencies uses a bell type EQ).
+
+Volumen fader: Increase or decrease the volumen of the selected channel.
+
+VuMeter: Indicates the signal level of the mix.
