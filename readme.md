@@ -1,3 +1,5 @@
+# AudioMixerJs
+
 This is an experimental audio mixer using Javascript/Web Audio Api for learning purpuses.
 
 The program uses five audio files with one audioContext and different processing stages to get the final sound.
